@@ -13,3 +13,15 @@ bsdtar xvf google_devices-shiba-ap2a.240705.005.a1-2f02e090.tgz
 
 echo "Firmware Obtained and Extracted - Success."
 sleep 2
+
+# skywalker@4090-nvidia-dev:~/shiba_debug/aosp$ ls
+# Android.bp      developers                                            libcore           test
+# art             development                                           libnativehelper   toolchain
+# bionic          device                                                lk_inc.mk         tools
+# bootable        external                                              packages          trusty
+# bootstrap.bash  extract-google_devices-shiba.sh                       pdk               vendor
+# build           frameworks                                            platform_testing  WORKSPACE
+# BUILD           google_devices-shiba-ap2a.240705.005.a1-2f02e090.tgz  prebuilts
+# cts             hardware                                              sdk
+# dalvik          kernel                                                system
+# skywalker@4090-nvidia-dev:~/shiba_debug/aosp$ 
