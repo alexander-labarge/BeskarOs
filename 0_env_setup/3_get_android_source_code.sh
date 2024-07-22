@@ -9,7 +9,7 @@ xdg-open https://android.googlesource.com/new-password
 read -p "Copy Google's Password Script as a Command into the Terminal and then Hit Enter:"
 echo "Downloading Android Source Code"
 sleep 2
-# dev note: android build tag - latest stable - android-14.0.0_r54 (5 Jul 24 release)
+# dev note: android build tag - latest stable - android-14.0.0_r54 - build ID: AP2A.240705.005.A1 (5 Jul 24 release)
 repo init --partial-clone -b android-14.0.0_r54 -u https://android.googlesource.com/platform/manifest
 repo sync -c -j$(nproc --all)
 echo "Android Source Download Complete"
