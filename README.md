@@ -1,4 +1,7 @@
-### BeskarOS
+```sh
+#!/bin/bash
+
+# BeskarOS
 
 ## Directory Structure
 
@@ -61,3 +64,88 @@ To set up the environment, run the scripts in the following order:
 
 ## Script Usage
 ### Pending..
+
+# BeskarOS with SilverBallService with Grogu APK
+
+## Development Plan for Integrating SilverBall Service into BeskarOS
+
+1. **Set Up BeskarOS Build Environment**
+   1. Prepare Development Environment
+      1. Install required tools (JDK, Git, Repo, etc.)
+      2. Set up the BeskarOS source tree
+
+2. **Create SilverBall Service**
+   1. Create a New System Service Directory
+      1. Navigate to the packages directory
+      2. Create the SilverBallService directory
+   2. Develop the SilverBall Service
+      1. Create AndroidManifest.xml for `com.thisistheway.silverball`
+      2. Develop `SilverBallService.java` for `com.thisistheway.silverball`
+         1. Define onCreate() method
+         2. Define onStartCommand() method
+         3. Define onBind() method
+         4. Define endBluetoothConnections() method
+         5. Define transferBluetoothControl() method
+         6. Define interactWithHciSocket() method
+         7. Define openHciConnection() method
+         8. Define closeHciConnection() method
+         9. Define sendHciCommand() method
+         10. Define receiveHciEvent() method
+      3. Develop `BluetoothManager.java` for `com.thisistheway.silverball`
+         1. Define Constructor
+         2. Define startDiscovery() method
+         3. Define stopDiscovery() method
+         4. Define pairDevice() method
+         5. Define endConnections() method
+         6. Define transferControl() method
+         7. Define interactWithHciSocket() method
+         8. Implement BroadcastReceiver (inner class)
+         9. Define openHciConnection() method
+         10. Define closeHciConnection() method
+         11. Define sendHciCommand() method
+         12. Define receiveHciEvent() method
+      4. Create Resource Files (maybe..?)
+         1. Define layout resources
+         2. Define string resources
+         3. Define other necessary resources
+
+3. **Configure Permissions and SELinux Policies**
+   1. Define Permissions
+      1. Add necessary permissions to AndroidManifest.xml for `com.thisistheway.silverball`
+   2. Configure SELinux Policies
+      1. Modify policy files in system/sepolicy/private/
+      2. Modify policy files in system/sepolicy/public/
+
+4. **Integrate SilverBall Service into BeskarOS Build**
+   1. Update Build Files
+      1. Modify Android.mk to include the service in the build
+   2. Add Service to System Image
+      1. Modify product.mk or device.mk to include the service - /system vs /vendor
+
+5. **Update and Test Grogu Application**
+   1. Update Grogu Application (`com.thisistheway.grogu`) to Work with SilverBall Service
+      1. Add communication with SilverBall service in MainActivity
+         1. Bind to SilverBall service
+         2. Implement endBluetoothConnections() method
+         3. Implement transferBluetoothControl() method
+         4. Implement interactWithHciSocket() method
+         5. Implement openHciConnection() method
+         6. Implement closeHciConnection() method
+         7. Implement sendHciCommand() method
+         8. Implement receiveHciEvent() method
+      2. Update BluetoothScanner to use SilverBall service
+      3. Update BluetoothScanHandler to handle new service interactions
+   2. Test Grogu Application
+      1. Install Grogu on the device with BeskarOS
+      2. Ensure Grogu interacts correctly with the SilverBall service
+      3. Verify all intended functionalities (e.g., end Bluetooth connections, transfer control, interact with HCI socket, open/close HCI connection, send/receive HCI commands)
+
+6. **Build and Test**
+   1. Build the BeskarOS Image
+      1. Compile the BeskarOS with the SilverBall service
+   2. Flash and Test
+      1. Flash the built image to the device
+      2. Verify the service starts and performs Bluetooth operations correctly
+      3. Test all functionalities provided by the SilverBall service
+      4. Ensure the system's stability and performance
+```
