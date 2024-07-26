@@ -28,13 +28,9 @@ read -p "Copy Google's Password Script as a Command into the Terminal and then H
 echo "Downloading Android Source Code..."
 sleep 2
 
-###################################TODO - FIX FROM HERE
-
-# Dev note: android build tag - latest stable - android-14.0.0_r54 - build ID: AP2A.240705.005.A1 (5 Jul 24 release)
 REPO_URL="https://android.googlesource.com/platform/manifest"
-BRANCH_NAME="android-14.0.0_r54"
 
-repo init --partial-clone -b "$BRANCH_NAME" -u "$REPO_URL" || error_exit "Repo init failed"
+repo init -u $REPO_URL -b main --partial-clone --clone-filter=blob:limit=10M || error_exit "Repo init failed"
 repo sync -c -j$(nproc --all) || error_exit "Repo sync failed"
 
 echo "Android Source Download Complete"
