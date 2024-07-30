@@ -3,7 +3,7 @@
 ## Software Development Plan & Initial Documentation
 
 ### Project Contributors:
-- skywalker & comrades
+- Skywalker & Comrades
 
 ### Project Start Date:
 - 29 Jul 24
@@ -12,11 +12,10 @@
 
 The primary motivation for developing BeskarOS stems from the current limitation in public release Android builds, which do not provide raw socket access to USB, Bluetooth, Radio, and Network stack hardware. This limitation restricts developers and advanced users from fully leveraging the hardware capabilities for specialized applications and low-level communication tasks. BeskarOS aims to bridge this gap by offering raw socket access through custom AIDL interfaces and new system-level services, all while maintaining robust Android security practices, including SELinux enforcement. These significant deviations from standard Android merit a full custom Android ROM to relock the bootloader and ensure device integrity. Additionally, we seek to ensure encrypted communication over both radio and any networked interface as soon as the device boots and control the public fingerprint of the device to ensure it looks like any other Android phone.
 
-The custom build of BeskarOS will also include the 6.6 Long Term Release (LTR) kernel custom tailored for use cases with Android, which offers several benefits over the currently used (by Android Mainline) 5.15 kernel. The 6.6 LTR kernel provides enhanced performance, better security features, improved hardware support, and more efficient power management, which are critical for secure, modern Android devices. These improvements will help ensure that BeskarOS is more robust, secure, and efficient than any commercially available distribution.
+The custom build of BeskarOS will also include the 6.6 Long Term Release (LTR) kernel custom-tailored for use cases with Android, which offers several benefits over the currently used (by Android Mainline) 5.15 kernel. The 6.6 LTR kernel provides enhanced performance, better security features, improved hardware support, and more efficient power management, which are critical for secure, modern Android devices. These improvements will help ensure that BeskarOS is more robust, secure, and efficient than any commercially available distribution.
 
 Reference (Android 15 Preview uses Kernel version 5.15 from 2021):
-
-https://www.kernel.org/category/releases.html
+- [Kernel Releases](https://www.kernel.org/category/releases.html)
 
 ### Table of Contents
 1. Project Scope
@@ -228,7 +227,9 @@ cc_library {
         "libbinder",
     ],
     cflags: [
-        "-D__ANDROID_VNDK__",
+        "-D__ANDROID_V
+
+NDK__",
     ],
     export_include_dirs: ["include"],
 }
