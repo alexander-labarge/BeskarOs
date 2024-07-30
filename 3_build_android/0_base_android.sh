@@ -18,4 +18,5 @@ cp ~/.android-certs/* ./build/target/product/security/
 
 # Lunch target and build
 lunch aosp_shiba-ap1a-userdebug
+#aosp_shiba-trunk_staging-eng
 m -j$(nproc --all)
