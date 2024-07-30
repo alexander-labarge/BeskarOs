@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Variables
-MIRROR_DIR="/usr/local/aosp/mirror"
-MAIN_DIR="/usr/local/aosp/main"
+MAIN_DIR=/mnt/android/main
 REPO_URL="https://android.googlesource.com/platform/manifest"
 FIRMWARE_BASE_URL="https://developers.google.com/android/blobs-preview"
 EXTRACT_SCRIPT="./extract-google_devices-shiba.sh"

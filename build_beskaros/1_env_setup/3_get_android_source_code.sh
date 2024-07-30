@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Variables
-MIRROR_DIR=/opt/aosp/mirror
-MAIN_DIR=/opt/aosp/main
+MIRROR_DIR=/mnt/android/mirror
+BESKAR_BUILD_DIR=/mnt/android/beskaros
 REPO_URL="https://android.googlesource.com/platform/manifest"
-MAKE_CORES="$(nproc)" # - you can change to an integer if you want to specify - I recommend if you want to be in android studio or something at the same time
-REQUIRED_SPACE_GB=1024 # - todo - find a way to poll how large the android mirror repo is. 1024 is a guess for now - could reduce probably with declaring -main as the branch
+MAKE_CORES="16" # Change to an integer if needed
+REQUIRED_SPACE_GB=512 # TODO: figure out top capacity
 
 # Function to display error messages and exit
 function error_exit {
@@ -31,15 +31,18 @@ function check_disk_space {
 }
 
 # Function to delete and recreate a directory
-function setup_directory {
+setup_directory() {
     local dir_path="$1"
-    check_disk_space "$dir_path"
+
     if [ -d "$dir_path" ]; then
-        echo "Directory $dir_path exists. Deleting it..."
-        sudo rm -rf "$dir_path" || error_exit "Failed to delete $dir_path"
+        echo "Directory $dir_path exists. Deleting its contents..."
+        sudo rm -rf "${dir_path:?}"/* || error_exit "Failed to delete contents of $dir_path"
+    else
+        echo "Creating directory $dir_path..."
+        sudo mkdir -p "$dir_path" || error_exit "Failed to create directory $dir_path"
     fi
-    echo "Creating directory $dir_path..."
-    sudo mkdir -p "$dir_path" || error_exit "Failed to create directory $dir_path"
+
+    check_disk_space "$dir_path"
     ensure_ownership "$dir_path"
 }
 
@@ -53,16 +56,23 @@ function ensure_ownership {
 # Create and sync the mirror
 function create_and_sync_mirror {
     setup_directory "$MIRROR_DIR"
+    
+    # Check if .repo directory exists and delete it if it does
+    if [ -d "$MIRROR_DIR/.repo" ]; then
+        echo "Deleting existing .repo directory..."
+        sudo rm -rf "$MIRROR_DIR/.repo" || error_exit "Failed to delete .repo directory in $MIRROR_DIR"
+    fi
+
     cd "$MIRROR_DIR" || error_exit "Failed to navigate to mirror directory"
     echo "Creating and syncing the mirror..."
-    repo init -u https://android.googlesource.com/mirror/manifest --mirror || error_exit "Repo init for mirror failed"
+    repo init -u "$REPO_URL" --mirror || error_exit "Repo init for mirror failed"
     repo sync -c -j"$MAKE_CORES" || error_exit "repo sync -c -j$MAKE_CORES for mirror failed"
 }
 
 # Sync clients from the mirror
 function sync_clients_from_mirror {
-    setup_directory "$MAIN_DIR"
-    cd "$MAIN_DIR" || error_exit "Failed to navigate to main directory"
+    setup_directory "$BESKAR_BUILD_DIR"
+    cd "$BESKAR_BUILD_DIR" || error_exit "Failed to navigate to main directory"
     echo "Syncing clients from the mirror..."
     repo init -u "$MIRROR_DIR/platform/manifest.git" || error_exit "Repo init for main failed"
     repo sync -c -j"$MAKE_CORES" || error_exit "repo sync -c -j$MAKE_CORES for main failed"
@@ -73,7 +83,7 @@ function final_sync {
     cd "$MIRROR_DIR" || error_exit "Failed to navigate to mirror directory"
     echo "Syncing the mirror against the server..."
     repo sync -c -j"$MAKE_CORES" || error_exit "repo sync -c -j$MAKE_CORES for mirror failed"
-    cd "$MAIN_DIR" || error_exit "Failed to navigate to main directory"
+    cd "$BESKAR_BUILD_DIR" || error_exit "Failed to navigate to main directory"
     echo "Syncing the client against the mirror..."
     repo sync -c -j"$MAKE_CORES" || error_exit "repo sync -c -j$MAKE_CORES for main failed"
 }
@@ -81,12 +91,11 @@ function final_sync {
 # Main function to orchestrate the setup
 function main {
     check_repo_command
-    setup_directory "/opt/aosp"
     create_and_sync_mirror
     sync_clients_from_mirror
     final_sync
     echo "Android Source Download Complete"
-    echo "Source code located at: $MAIN_DIR"
+    echo "Source code located at: $BESKAR_BUILD_DIR"
 }
 
 # Run the main function
