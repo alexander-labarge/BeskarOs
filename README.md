@@ -190,21 +190,43 @@ This section provides an overview of the implementation of the SilverBallBluetoo
 The directory structure for the SilverBallBluetoothService is as follows:
 
 ```sh
-skywalker@deathstar:~/thisistheway/silverball$ tree
+skywalker@deathstar:~/beskaros$ tree
 .
-├── Android.bp
-├── BoardConfig.mk
-├── include
-│   ├── ISilverBallBTCallback.h
-│   └── SilverBallBTService.h
-└── service
-    ├── ISilverBallBTCallback.aidl
-    ├── ISilverBallBTCallback.cpp
-    ├── ISilverBallBTService.aidl
-    ├── SilverBallBTCallback.cpp
-    └── SilverBallBTService.cpp
+├── 0_config
+├── 1_env_setup
+│   ├── 0_ubuntu_22_04_base.sh
+│   ├── 1_install_newest_adb_fastboot.sh
+│   ├── 2_install_android_build_tools.sh
+│   ├── 3_get_android_source_code.sh
+│   └── ubuntu_22.04_packages_required.txt
+├── 2_build_android
+│   └── 0_base_android.sh
+├── 3_pixel_8_firmware
+│   └── 0_get_latest_pixel8_preview_binaries.sh
+├── BeskarOS_SystemAPIs
+│   ├── bluetooth_raw_hci
+│   │   └── thisistheway
+│   │       └── silverball
+│   │           ├── Android.bp
+│   │           ├── BoardConfig.mk
+│   │           ├── include
+│   │           │   ├── ISilverBallBTCallback.h
+│   │           │   └── SilverBallBTService.h
+│   │           └── service
+│   │               ├── ISilverBall
 
-2 directories, 9 files
+BTCallback.aidl
+│   │               ├── ISilverBallBTCallback.cpp
+│   │               ├── ISilverBallBTService.aidl
+│   │               ├── SilverBallBTCallback.cpp
+│   │               └── SilverBallBTService.cpp
+│   └── usb_raw_socket
+├── README.md
+└── scratch
+    ├── create_local_android_repo.sh
+    └── silverball.sh
+
+12 directories, 19 files
 ```
 
 #### Build Configuration
@@ -227,9 +249,7 @@ cc_library {
         "libbinder",
     ],
     cflags: [
-        "-D__ANDROID_V
-
-NDK__",
+        "-D__ANDROID_VNDK__",
     ],
     export_include_dirs: ["include"],
 }
@@ -436,3 +456,4 @@ void SilverBallBTService::registerCallback(const android::sp<ISilverBallBTCallba
 - **AIDL Interfaces**: The `ISilverBallBTCallback.aidl` and `ISilverBallBTService.aidl` files define the AIDL interfaces for callback and service communication.
 - **Header Files**: The `ISilverBallBTCallback.h` and `SilverBallBTService.h` files define the C++ interfaces for the callback and service classes.
 - **C++ Implementations**: The `ISilverBallBTCallback.cpp` and `SilverBallBTService.cpp` files implement the logic for handling HCI events and managing raw HCI communication with the Bluetooth controller.
+
