@@ -2,7 +2,6 @@
 
 # Variables
 BESKAR_BUILD_DIR=/mnt/android/beskaros
-REPO_URL="https://android.googlesource.com/platform/manifest"
 FIRMWARE_BASE_URL="https://developers.google.com/android/blobs-preview"
 EXTRACT_SCRIPT="./extract-google_devices-shiba.sh"
 
