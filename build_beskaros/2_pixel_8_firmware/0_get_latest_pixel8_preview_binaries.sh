@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variables
-MAIN_DIR=/mnt/android/main
+BESKAR_BUILD_DIR=/mnt/android/beskaros
 REPO_URL="https://android.googlesource.com/platform/manifest"
 FIRMWARE_BASE_URL="https://developers.google.com/android/blobs-preview"
 EXTRACT_SCRIPT="./extract-google_devices-shiba.sh"
@@ -27,8 +27,8 @@ get_latest_firmware_url() {
 echo "Getting Proprietary Firmware from Google for the Pixel 8"
 
 # Change directory to build home
-echo "Changing directory to $MAIN_DIR"
-cd $MAIN_DIR
+echo "Changing directory to $BESKAR_BUILD_DIR"
+cd $BESKAR_BUILD_DIR
 check_success "Change directory"
 
 # Get the latest firmware URL
