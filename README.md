@@ -1,3 +1,5 @@
+Here is the corrected structure and documentation for the SilverBallBluetoothService based on the new directory structure:
+
 ### BeskarOS
 
 ## Software Development Plan & Initial Documentation
@@ -18,22 +20,22 @@ Reference (Android 15 Preview uses Kernel version 5.15 from 2021):
 - [Kernel Releases](https://www.kernel.org/category/releases.html)
 
 ### Table of Contents
-1. Project Scope
-2. Requirements
-3. System Architecture
-4. Development Environment
-5. Development Phases
-6. Security Considerations
-7. Testing and Quality Assurance
-8. Deployment
-9. Documentation
-10. Timeline and Milestones
+1. [Project Scope](#project-scope)
+2. [Requirements](#requirements)
+3. [System Architecture](#system-architecture)
+4. [Development Environment](#development-environment)
+5. [Development Phases](#development-phases)
+6. [Security Considerations](#security-considerations)
+7. [Testing and Quality Assurance](#testing-and-quality-assurance)
+8. [Deployment](#deployment)
+9. [Documentation](#documentation)
+10. [Timeline and Milestones](#timeline-and-milestones)
 
 ### Project Scope
 
 **Objective**: Create BeskarOS, an Android-based custom ROM with raw socket access to specific hardware components.
 
-**Target Version**: 0.1.0
+**Target Version**: beta-0.1.0
 
 **Primary Features**:
 - Raw socket access to USB, Bluetooth, Radio, and Network stack hardware.
@@ -98,7 +100,7 @@ Reference (Android 15 Preview uses Kernel version 5.15 from 2021):
 ### Development Phases
 
 **Week 1: Initial Release and Core Development**
-- Planning and Design: Finalize detailed requirements and high-level design.
+- Planning and Design: Betaize detailed requirements and high-level design.
 - Initial Implementation: 
   - Basic kernel modifications for raw socket support.
   - Initial HAL updates to expose raw socket interfaces.
@@ -122,16 +124,16 @@ Reference (Android 15 Preview uses Kernel version 5.15 from 2021):
 - System Services: Develop and integrate system service for Radio raw socket access.
 - Patch Release: Compile and release updated version (v0.1.0-beta2).
 
-**Week 4: Network Stack Development and Finalization**
+**Week 4: Network Stack Development and Betaization**
 - Kernel and HAL Enhancements: Refine kernel and HAL implementations for Network.
 - AIDL Interfaces: Complete AIDL interfaces for Network.
 - System Services: Develop and integrate system service for Network raw socket access.
 - Security Implementations: Define and enforce SELinux policies and other security measures.
 - Performance Optimization: Optimize system services for performance and responsiveness.
-- Final Integration: Ensure all components are fully integrated and functioning.
-- Quality Assurance: Conduct final testing, including unit, integration, system, and security tests.
-- Documentation: Prepare and finalize technical documentation and user guides.
-- Final Release: Compile, sign, and release the final version (v0.1.0).
+- Beta Integration: Ensure all components are fully integrated and functioning.
+- Quality Assurance: Conduct Beta testing, including unit, integration, system, and security tests.
+- Documentation: Prepare and Betaize technical documentation and user guides.
+- Beta Release: Compile, sign, and release the Beta version (v0.1.0).
 
 ### Security Considerations
 
@@ -165,7 +167,7 @@ Reference (Android 15 Preview uses Kernel version 5.15 from 2021):
 - **Week 1**: Initial release with SilverBallBluetoothService and Grogu APK.
 - **Week 2**: USB stack development and integration.
 - **Week 3**: Radio stack development and integration.
-- **Week 4**: Network stack development, final testing, documentation, and deployment.
+- **Week 4**: Network stack development, Beta testing, documentation, and deployment.
 
 ### Notes:
 
@@ -192,18 +194,22 @@ The directory structure for the SilverBallBluetoothService is as follows:
 ```sh
 skywalker@deathstar:~/beskaros$ tree
 .
-├── 0_config
-├── 1_env_setup
-│   ├── 0_ubuntu_22_04_base.sh
-│   ├── 1_install_newest_adb_fastboot.sh
-│   ├── 2_install_android_build_tools.sh
-│   ├── 3_get_android_source_code.sh
-│   └── ubuntu_22.04_packages_required.txt
-├── 2_build_android
-│   └── 0_base_android.sh
-├── 3_pixel_8_firmware
-│   └── 0_get_latest_pixel8_preview_binaries.sh
-├── BeskarOS_SystemAPIs
+├── build_beskaros
+│   ├── 0_config
+│   ├── 1_env_setup
+│   │   ├── 0_ubuntu_22_04_base.sh
+│   │   ├── 1_install_newest_adb_fastboot.sh
+│   │   ├── 2_install_android_build_tools.sh
+│   │   ├── 3_get_android_source_code.sh
+│   │   └── ubuntu_22.04_packages_required.txt
+│   ├── 2_build_android
+│   │   └── 0_base_android.sh
+│   └── 3_pixel_8_firmware
+│       └── 0_get_latest_pixel8_preview_binaries.sh
+├── manifests
+│   ├── base
+│   └── kernel
+├── new_system_services
 │   ├── bluetooth_raw_hci
 │   │   └── thisistheway
 │   │       └── silverball
@@ -219,12 +225,13 @@ skywalker@deathstar:~/beskaros$ tree
 │   │               ├── SilverBallBTCallback.cpp
 │   │               └── SilverBallBTService.cpp
 │   └── usb_raw_socket
+├── patches
 ├── README.md
 └── scratch
     ├── create_local_android_repo.sh
     └── silverball.sh
 
-12 directories, 19 files
+17 directories, 19 files
 ```
 
 #### Build Configuration
@@ -454,4 +461,4 @@ void SilverBallBTService::registerCallback(const android::sp<ISilverBallBTCallba
 - **AIDL Interfaces**: The `ISilverBallBTCallback.aidl` and `ISilverBallBTService.aidl` files define the AIDL interfaces for callback and service communication.
 - **Header Files**: The `ISilverBallBTCallback.h` and `SilverBallBTService.h` files define the C++ interfaces for the callback and service classes.
 - **C++ Implementations**: The `ISilverBallBTCallback.cpp` and `SilverBallBTService.cpp` files implement the logic for handling HCI events and managing raw HCI communication with the Bluetooth controller.
-
+```
