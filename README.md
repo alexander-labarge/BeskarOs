@@ -213,9 +213,7 @@ skywalker@deathstar:~/beskaros$ tree
 │   │           │   ├── ISilverBallBTCallback.h
 │   │           │   └── SilverBallBTService.h
 │   │           └── service
-│   │               ├── ISilverBall
-
-BTCallback.aidl
+│   │               ├── ISilverBallBTCallback.aidl
 │   │               ├── ISilverBallBTCallback.cpp
 │   │               ├── ISilverBallBTService.aidl
 │   │               ├── SilverBallBTCallback.cpp
