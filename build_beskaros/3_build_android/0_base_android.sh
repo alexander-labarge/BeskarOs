@@ -7,7 +7,7 @@ cd ~/shiba_debug/aosp
 source build/envsetup.sh
 
 # Generate keys
-subject='/C=US/ST=State/L=City/O=Android/OU=Android/CN=Android/emailAddress=email@example.com'
+subject='/C=US/ST=PA/L=Philadelphia/O=This/OU=is/CN=TheWay/emailAddress=alex@labarge.dev'
 mkdir -p vendor/aosp/signing/keys
 for x in releasekey platform shared media networkstack verity otakey testkey sdk_sandbox bluetooth nfc; do
     ./development/tools/make_key vendor/aosp/signing/keys/$x "$subject"
