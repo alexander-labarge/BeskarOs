@@ -17,6 +17,6 @@ done
 cp vendor/aosp/signing/keys/* ./build/target/product/security/
 
 # Lunch target and build
-lunch aosp_shiba-ap1a-userdebug
+lunch aosp_shiba-trunk_staging-userdebug
 #aosp_shiba-trunk_staging-eng
 m -j$(nproc --all)
