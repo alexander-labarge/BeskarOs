@@ -1,9 +1,6 @@
-### BeskarOS
+![beskaros_logo](https://github.com/user-attachments/assets/3c4e0b07-caf6-4050-82b4-244c8bd60103)
 
 ## Software Development Plan & Initial Documentation
-
-### Project Contributors:
-- Skywalker & Comrades
 
 ### Project Start Date:
 - 29 Jul 24
