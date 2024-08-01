@@ -53,9 +53,5 @@ The Treble compliant system image included in this release ensures compatibility
 
 ## Notes
 
-- Ensure you have `adb` and `fastboot` installed and available in your `PATH`.
+- Ensure you have `adb` and `fastboot` installed and available in your `PATH`. Use the installer script `fastboot_adb_latest_install.sh` if necessary.
 - The Treble compliant system image ensures compatibility with any Android device running Android 8 or later.
-
----
-
-Feel free to copy and paste this into your release's README section!
