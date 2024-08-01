@@ -190,6 +190,8 @@ This section provides an overview of the implementation of the SilverBallBluetoo
 The directory structure for the SilverBallBluetoothService is as follows:
 
 ```sh
+skywalker@deathstar:~/beskaros$ tree -L 5
+.
 ├── apps
 │   ├── README.md
 │   ├── system
@@ -226,6 +228,17 @@ The directory structure for the SilverBallBluetoothService is as follows:
 ├── platform
 │   ├── bluetooth_raw_hci
 │   │   └── silverball
+│   │       ├── Android.bp
+│   │       ├── BoardConfig.mk
+│   │       ├── include
+│   │       │   ├── ISilverBallBTCallback.h
+│   │       │   └── SilverBallBTService.h
+│   │       └── service
+│   │           ├── ISilverBallBTCallback.aidl
+│   │           ├── ISilverBallBTCallback.cpp
+│   │           ├── ISilverBallBTService.aidl
+│   │           ├── SilverBallBTCallback.cpp
+│   │           └── SilverBallBTService.cpp
 │   └── README.md
 ├── python
 │   └── README.md
@@ -239,7 +252,7 @@ The directory structure for the SilverBallBluetoothService is as follows:
 └── vendor
     └── README.md
 
-20 directories, 28 files
+22 directories, 37 files
 ```
 #### Build Configuration
 
