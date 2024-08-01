@@ -2,7 +2,7 @@
 
 ## Overview
 
-Welcome to the BeskarOS v0.1.0-alpha release! This release is designed specifically for the Pixel 8 but is compatible with any Android device manufactured to run Android 8 or later, as this system image is a treble compliant (more info below).
+Welcome to the BeskarOS v0.1.0-alpha release! This release is designed specifically for the Pixel 8 but is compatible with any Android device manufactured to run Android 8 or later, as this system image is treble compliant (more info below).
 
 ## Included Files
 
