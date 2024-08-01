@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # cd to android home
-cd ~/shiba_debug/aosp
+cd /mnt/android/beskaros
 
 # Setup environment
 source build/envsetup.sh
