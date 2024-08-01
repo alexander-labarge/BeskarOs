@@ -1,5 +1,7 @@
-![beskaros_logo](https://github.com/user-attachments/assets/3c4e0b07-caf6-4050-82b4-244c8bd60103)
-<img src="https://github.com/user-attachments/assets/3c4e0b07-caf6-4050-82b4-244c8bd60103" alt="beskaros_logo" width="300"/>
+<div style="text-align:center;">
+    <img src="https://github.com/user-attachments/assets/3c4e0b07-caf6-4050-82b4-244c8bd60103" alt="beskaros_logo" width="300"/>
+</div>
+
 ## Software Development Plan & Initial Documentation
 
 ### Project Start Date:
