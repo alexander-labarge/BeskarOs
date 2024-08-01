@@ -1,106 +1,61 @@
-# Flashing BeskarOS
+# BeskarOS v0.1.0-alpha
 
-This guide provides instructions to flash BeskarOS onto your Pixel 8 device using `adb` and `fastboot`.
-Note: this guide is being populated as the build process changes - flash_beskar_xxxx.sh will always be embedded
-    within a release package.
+## Overview
 
-## Prerequisites
+Welcome to the BeskarOS v0.1.0-alpha release! This release is designed specifically for the Pixel 8 but is compatible with any Android device manufactured to run Android 8 or later, as this system image is a treble compliant (more info below).
 
-1. Ensure `adb` is installed:
-    ```bash
-    if ! command -v adb &> /dev/null; then
-        echo "adb is not installed. Please install adb and try again."
-        exit 1
-    fi
-    ```
+## Included Files
 
-2. Ensure `fastboot` is installed:
-    ```bash
-    if ! command -v fastboot &> /dev/null; then
-        echo "fastboot is not installed. Please install fastboot and try again."
-        exit 1
-    fi
-    ```
+1. **system.img** - (1762.82 MB) The Treble compliant system image.
+2. **vbmeta.img** - (0.00 MB) The vbmeta image for flashing.
+3. **beskar_flash.sh** - (0.01 MB) Script to flash BeskarOS.
+4. **factory_flash.sh** - (0.01 MB) Script to reset the device to the latest public factory build (useful for baselining the device with the latest platform SDK build which the BeskarOS image uses).
+5. **fastboot_adb_latest_install.sh** - (0.01 MB) Script to install the latest ADB and Fastboot tools.
 
-3. Check if `adb` version is at least 35:
-    ```bash
-    adb_version=$(adb --version | grep -oP 'Version \K[0-9]+\.[0-9]+' | head -1)
-    adb_major_version=$(echo $adb_version | cut -d. -f1)
+## Flashing Instructions
 
-    if [ "$adb_major_version" -lt 35 ]; then
-        echo "adb version is less than 35. Please update adb and try again."
-        exit 1
-    fi
-    ```
+### Flash BeskarOS
 
-4. Check if `fastboot` version is at least 35:
-    ```bash
-    fastboot_version=$(fastboot --version | grep -oP 'fastboot version \K[0-9]+\.[0-9]+' | head -1)
-    fastboot_major_version=$(echo $fastboot_version | cut -d. -f1)
+To use BeskarOS, execute the `beskar_flash.sh` script. This will flash the custom BeskarOS system image to your device. BeskarOS offers enhanced features and security, leveraging the full potential of your hardware.
 
-    if [ "$fastboot_major_version" -lt 35 ]; then
-        echo "fastboot version is less than 35. Please update fastboot and try again."
-        exit 1
-    fi
-    ```
+**Usage:**
+```bash
+./beskar_flash.sh
+```
 
-5. Ensure a device is connected:
-    ```bash
-    device_count=$(adb devices | grep -w "device" | wc -l)
-    if [ "$device_count" -eq 0 ]; then
-        echo "No device found. Please connect a device and try again."
-        exit 1
-    fi
-    ```
+### Factory Reset to Latest Public Build
 
-## Flashing Steps
+If you encounter issues and want to baseline your device to the latest public factory build, use the `factory_flash.sh` script. This will download, unzip, and flash the factory image to your device, aligning it with the latest platform SDK build.
 
-1. Reboot the device into bootloader mode:
-    ```bash
-    adb reboot bootloader
-    ```
+**Usage:**
+```bash
+./factory_flash.sh
+```
 
-2. Unlock the bootloader:
-    ```bash
-    fastboot flashing unlock
-    ```
+### Install Latest ADB and Fastboot
 
-3. Disable verity and verification, then flash `vbmeta`:
-    ```bash
-    fastboot --disable-verity --disable-verification flash vbmeta vbmeta.img
-    ```
+To install the latest ADB and Fastboot tools, use the `fastboot_adb_latest_install.sh` script. This will ensure you have the latest versions of these essential tools.
 
-4. Reboot into fastboot mode:
-    ```bash
-    fastboot reboot fastboot
-    ```
+**Usage:**
+```bash
+./fastboot_adb_latest_install.sh
+```
 
-5. Erase the current system:
-    ```bash
-    fastboot erase system
-    ```
+## What is Project Treble?
 
-6. Flash the new system image:
-    ```bash
-    fastboot flash system system.img
-    ```
+Project Treble is an initiative by Google to make it easier and faster for manufacturers to update devices to new Android versions. By modularizing the Android OS framework, Treble allows the core Android OS to be updated independently of the device-specific low-level software. This results in several benefits:
 
-7. Perform a factory reset:
-    ```bash
-    fastboot -w
-    ```
+- **Compatibility:** Devices running Android 8 (Oreo) or later are Treble compliant, meaning the provided system image can work across various devices without modification.
+- **Faster Updates:** Manufacturers can deliver updates more quickly without needing to rework the entire OS for each device.
+- **Longer Device Lifespan:** Users can enjoy the latest Android features and security updates on older devices.
 
-8. Reboot the device:
-    ```bash
-    fastboot reboot
-    ```
+The Treble compliant system image included in this release ensures compatibility with any Android device that supports Project Treble, providing a seamless flashing experience.
 
-9. Verify the flashing process:
-    ```bash
-    if [ $? -eq 0 ]; then
-        echo "Device successfully flashed and rebooted."
-    else
-        echo "An error occurred during the flashing process."
-        exit 1
-    fi
-    ```
+## Notes
+
+- Ensure you have `adb` and `fastboot` installed and available in your `PATH`.
+- The Treble compliant system image ensures compatibility with any Android device running Android 8 or later.
+
+---
+
+Feel free to copy and paste this into your release's README section!
