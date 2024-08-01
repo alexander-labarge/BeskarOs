@@ -190,48 +190,61 @@ This section provides an overview of the implementation of the SilverBallBluetoo
 The directory structure for the SilverBallBluetoothService is as follows:
 
 ```sh
-skywalker@deathstar:~/beskaros$ tree
 .
-├── build_beskaros
-│   ├── 0_config
-│   ├── 1_env_setup
+├── apps
+│   ├── README.md
+│   ├── system
+│   │   └── README.md
+│   └── user
+│       └── README.md
+├── build
+│   ├── 0_env_setup
 │   │   ├── 0_ubuntu_22_04_base.sh
 │   │   ├── 1_install_newest_adb_fastboot.sh
 │   │   ├── 2_install_android_build_tools.sh
 │   │   ├── 3_get_android_source_code.sh
 │   │   └── ubuntu_22.04_packages_required.txt
-│   ├── 2_build_android
+│   ├── 1_pixel_8_firmware
+│   │   └── 0_get_latest_pixel8_preview_binaries.sh
+│   ├── 2_compile_base_android
 │   │   └── 0_base_android.sh
-│   └── 3_pixel_8_firmware
-│       └── 0_get_latest_pixel8_preview_binaries.sh
-├── manifests
-│   ├── base
-│   └── kernel
-├── new_system_services
-│   ├── bluetooth_raw_hci
-│   │   └── thisistheway
-│   │       └── silverball
-│   │           ├── Android.bp
-│   │           ├── BoardConfig.mk
-│   │           ├── include
-│   │           │   ├── ISilverBallBTCallback.h
-│   │           │   └── SilverBallBTService.h
-│   │           └── service
-│   │               ├── ISilverBallBTCallback.aidl
-│   │               ├── ISilverBallBTCallback.cpp
-│   │               ├── ISilverBallBTService.aidl
-│   │               ├── SilverBallBTCallback.cpp
-│   │               └── SilverBallBTService.cpp
-│   └── usb_raw_socket
+│   └── README.md
+├── cloudcityvm
+│   └── README.md
+├── hardware
+│   └── README.md
+├── kernel
+│   └── README.md
+├── LICENSE
 ├── patches
+│   └── README.md
+├── platform
+│   ├── bluetooth_raw_hci
+│   │   └── silverball
+│   │       ├── Android.bp
+│   │       ├── BoardConfig.mk
+│   │       ├── include
+│   │       │   ├── ISilverBallBTCallback.h
+│   │       │   └── SilverBallBTService.h
+│   │       └── service
+│   │           ├── ISilverBallBTCallback.aidl
+│   │           ├── ISilverBallBTCallback.cpp
+│   │           ├── ISilverBallBTService.aidl
+│   │           ├── SilverBallBTCallback.cpp
+│   │           └── SilverBallBTService.cpp
+│   └── README.md
 ├── README.md
-└── scratch
-    ├── create_local_android_repo.sh
-    └── silverball.sh
+├── releases
+│   ├── README.md
+│   └── v0.1.0_31jul24_2130_base_image_flashable_with_root
+│       └── pending-1GB-maybe-elsewhere
+├── selinux
+│   └── README.md
+└── vendor
+    └── README.md
 
-17 directories, 19 files
+20 directories, 31 files
 ```
-
 #### Build Configuration
 
 The build configuration for the SilverBallBluetoothService is defined in `Android.bp` and `BoardConfig.mk`.
