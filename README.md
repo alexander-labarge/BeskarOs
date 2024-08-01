@@ -1,5 +1,3 @@
-Here is the corrected structure and documentation for the SilverBallBluetoothService based on the new directory structure:
-
 ### BeskarOS
 
 ## Software Development Plan & Initial Documentation
