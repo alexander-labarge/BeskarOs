@@ -265,7 +265,7 @@ The build configuration for the SilverBallBluetoothService is defined in `Androi
 cc_library {
     name: "libSilverballBluetoothService",
     vendor_available: true,
-    system_ext_specific: true,  // or product_specific: true, depending on your requirement
+    system_ext_specific: true,
     srcs: [
         "service/SilverBallBTService.cpp",
         "service/ISilverBallBTCallback.cpp",
