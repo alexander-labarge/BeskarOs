@@ -1,0 +1,17 @@
+// vendor/thisistheway/silverball/Android.bp
+cc_library {
+    name: "libSilverballBluetoothService",
+    vendor_available: true,
+    system_ext_specific: true,  // or product_specific: true, depending on your requirement
+    srcs: [
+        "service/SilverBallBTService.cpp",
+        "service/ISilverBallBTCallback.cpp",
+    ],
+    shared_libs: [
+        "libbinder",
+    ],
+    cflags: [
+        "-D__ANDROID_VNDK__",
+    ],
+    export_include_dirs: ["include"],
+}
