@@ -1,2 +1,5 @@
 .github/
 .github/*
+installer/*.img
+installer/install*
+installer/shiba*

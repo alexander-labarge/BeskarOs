@@ -63,27 +63,28 @@ function countdown_timer() {
     done
 }
 
-function flash_device() {
+function factory_flash_device() {
     echo "
-BBBBBBBBBBBBBBBBB                                        kkkkkkkk                                                   OOOOOOOOO        SSSSSSSSSSSSSSS 
-B::::::::::::::::B                                       k::::::k                                                 OO:::::::::OO    SS:::::::::::::::S
-B::::::BBBBBB:::::B                                      k::::::k                                               OO:::::::::::::OO S:::::SSSSSS::::::S
-BB:::::B     B:::::B                                     k::::::k                                              O:::::::OOO:::::::OS:::::S     SSSSSSS
-  B::::B     B:::::B    eeeeeeeeeeee        ssssssssss    k:::::k    kkkkkkkaaaaaaaaaaaaa  rrrrr   rrrrrrrrr   O::::::O   O::::::OS:::::S            
-  B::::B     B:::::B  ee::::::::::::ee    ss::::::::::s   k:::::k   k:::::k a::::::::::::a r::::rrr:::::::::r  O:::::O     O:::::OS:::::S            
-  B::::BBBBBB:::::B  e::::::eeeee:::::eess:::::::::::::s  k:::::k  k:::::k  aaaaaaaaa:::::ar:::::::::::::::::r O:::::O     O:::::O S::::SSSS         
-  B:::::::::::::BB  e::::::e     e:::::es::::::ssss:::::s k:::::k k:::::k            a::::arr::::::rrrrr::::::rO:::::O     O:::::O  SS::::::SSSSS    
-  B::::BBBBBB:::::B e:::::::eeeee::::::e s:::::s  ssssss  k::::::k:::::k      aaaaaaa:::::a r:::::r     r:::::rO:::::O     O:::::O    SSS::::::::SS  
-  B::::B     B:::::Be:::::::::::::::::e    s::::::s       k:::::::::::k     aa::::::::::::a r:::::r     rrrrrrrO:::::O     O:::::O       SSSSSS::::S 
-  B::::B     B:::::Be::::::eeeeeeeeeee        s::::::s    k:::::::::::k    a::::aaaa::::::a r:::::r            O:::::O     O:::::O            S:::::S
-  B::::B     B:::::Be:::::::e           ssssss   s:::::s  k::::::k:::::k  a::::a    a:::::a r:::::r            O::::::O   O::::::O            S:::::S
-BB:::::BBBBBB::::::Be::::::::e          s:::::ssss::::::sk::::::k k:::::k a::::a    a:::::a r:::::r            O:::::::OOO:::::::OSSSSSSS     S:::::S
-B:::::::::::::::::B  e::::::::eeeeeeee  s::::::::::::::s k::::::k  k:::::ka:::::aaaa::::::a r:::::r             OO:::::::::::::OO S::::::SSSSSS:::::S
-B::::::::::::::::B    ee:::::::::::::e   s:::::::::::ss  k::::::k   k:::::ka::::::::::aa:::ar:::::r               OO:::::::::OO   S:::::::::::::::SS 
-BBBBBBBBBBBBBBBBB       eeeeeeeeeeeeee    sssssssssss    kkkkkkkk    kkkkkkkaaaaaaaaaa  aaaarrrrrrr                 OOOOOOOOO      SSSSSSSSSSSSSSS   
+
+        ########    ###     ######  ########  #######  ########  ##    ## 
+        ##         ## ##   ##    ##    ##    ##     ## ##     ##  ##  ##  
+        ##        ##   ##  ##          ##    ##     ## ##     ##   ####   
+        ######   ##     ## ##          ##    ##     ## ########     ##    
+        ##       ######### ##          ##    ##     ## ##   ##      ##    
+        ##       ##     ## ##    ##    ##    ##     ## ##    ##     ##    
+        ##       ##     ##  ######     ##     #######  ##     ##    ##    
+
+            ########  #### ##     ## ######## ##           #######            
+            ##     ##  ##   ##   ##  ##       ##          ##     ##           
+            ##     ##  ##    ## ##   ##       ##          ##     ##           
+            ########   ##     ###    ######   ##           #######            
+            ##         ##    ## ##   ##       ##          ##     ##           
+            ##         ##   ##   ##  ##       ##          ##     ##           
+            ##        #### ##     ## ######## ########     #######            
+                                                    
                                                                             "
 
-    einfo_purple_bold "BeskarOS 0.1.0 Flashing Tool"
+    einfo_purple_bold "BeskarOS 0.1.0 Pixel 8 Factory Flashing Tool"
 
     # Check if adb is installed
     if ! command -v adb &> /dev/null; then
@@ -145,44 +146,30 @@ BBBBBBBBBBBBBBBBB       eeeeeeeeeeeeee    sssssssssss    kkkkkkkk    kkkkkkkaaaa
     einfo "Build Version SDK: $build_version_sdk"
     einfo "Build ID: $build_id"
 
-    # Reboot the device into bootloader mode
+    # Download the factory image
+    einfo "Downloading factory image..."
+    exec_and_log "wget https://dl.google.com/dl/android/aosp/shiba-ap2a.240705.005-factory-461aa7c8.zip"
+
+    # Unzip the downloaded factory image
+    einfo "Unzipping factory image..."
+    exec_and_log "unzip shiba-ap2a.240705.005-factory-461aa7c8.zip"
+
+    # Navigate to the unzipped directory
+    cd shiba-ap2a.240705.005
+    einfo "Navigated to $(pwd)"
+
+    # Reboot to Bootloader
+    einfo "Rebooting to bootloader..."
     exec_and_log "adb reboot bootloader"
 
-    einfo "Bootloader mode activated"
+    # Flash the factory image
+    einfo "Flashing factory image..."
 
-    # Unlock the bootloader
-    exec_and_log "fastboot flashing unlock"
-
-    einfo "Bootloader verified unlocked"
-
-    # Disable verity and verification, then flash vbmeta
-    exec_and_log "fastboot --disable-verity --disable-verification flash vbmeta vbmeta.img"
-
-    einfo "vbmeta cleared and re-flashed with corresponding new vbmeta"
-
-    # Reboot into fastboot mode
-    exec_and_log "fastboot reboot fastboot"
-
-    einfo "Fastboot mode activated"
-    einfo "Flashing system image"
-
-    countdown_timer
-
-    # Erase the current system
-    exec_and_log "fastboot erase system"
-
-    # Flash the new system image
-    exec_and_log "fastboot flash system system.img"
-
-    # Perform a factory reset
-    exec_and_log "fastboot -w"
-
-    # Reboot the device
-    exec_and_log "fastboot reboot"
+    exec_and_log "./flash-all.sh"
 
     einfo "Device successfully flashed and rebooted."
     einfo "Script ended successfully"
 }
 
-# Run the flash_device function
-flash_device
+# Run the factory_flash_device function
+factory_flash_device
