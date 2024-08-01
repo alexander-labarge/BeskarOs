@@ -205,13 +205,19 @@ The directory structure for the SilverBallBluetoothService is as follows:
 │   │   └── ubuntu_22.04_packages_required.txt
 │   ├── 1_pixel_8_firmware
 │   │   └── 0_get_latest_pixel8_preview_binaries.sh
-│   ├── 2_compile_base_android
-│   │   └── 0_base_android.sh
-│   └── README.md
+│   └── 2_compile_base_android
+│       └── 0_base_android.sh
 ├── cloudcityvm
 │   └── README.md
 ├── hardware
 │   └── README.md
+├── installer
+│   ├── beskar_flash.sh
+│   ├── factory_flash.sh
+│   ├── fastboot_adb_latest_install.sh
+│   ├── README.md
+│   ├── system.img
+│   └── vbmeta.img
 ├── kernel
 │   └── README.md
 ├── LICENSE
@@ -220,29 +226,20 @@ The directory structure for the SilverBallBluetoothService is as follows:
 ├── platform
 │   ├── bluetooth_raw_hci
 │   │   └── silverball
-│   │       ├── Android.bp
-│   │       ├── BoardConfig.mk
-│   │       ├── include
-│   │       │   ├── ISilverBallBTCallback.h
-│   │       │   └── SilverBallBTService.h
-│   │       └── service
-│   │           ├── ISilverBallBTCallback.aidl
-│   │           ├── ISilverBallBTCallback.cpp
-│   │           ├── ISilverBallBTService.aidl
-│   │           ├── SilverBallBTCallback.cpp
-│   │           └── SilverBallBTService.cpp
+│   └── README.md
+├── python
 │   └── README.md
 ├── README.md
-├── releases
-│   ├── README.md
-│   └── v0.1.0_31jul24_2130_base_image_flashable_with_root
-│       └── pending-1GB-maybe-elsewhere
 ├── selinux
+│   └── README.md
+├── system
+│   └── README.md
+├── user
 │   └── README.md
 └── vendor
     └── README.md
 
-20 directories, 31 files
+20 directories, 28 files
 ```
 #### Build Configuration
 
