@@ -1,5 +1,5 @@
 <div style="text-align:center;">
-    <img src="https://github.com/user-attachments/assets/f2b4534a-c43a-4ded-a38a-68225b1aa8a0" alt="beskaros_logo" width="300"/>
+    <img src="https://github.com/user-attachments/assets/454985f1-a4d4-4996-9443-597d4b0d726b" alt="beskaros_logo" width="300"/>
 </div>
 
 ## Software Development Plan & Initial Documentation
