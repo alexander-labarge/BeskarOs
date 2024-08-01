@@ -31,8 +31,8 @@ rm platform-tools-latest-linux.zip
 echo "#########################################################################"
 echo "Latest ADB and Fastboot installed and added to Path"
 echo "#########################################################################"
-fastboot --version
-adb --version
 echo "sourcing bashrc"
 source ~/.bashrc
 echo "bashrc source done"
+fastboot --version
+adb --version
