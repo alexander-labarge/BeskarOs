@@ -190,7 +190,6 @@ This section provides an overview of the implementation of the SilverBallBluetoo
 The directory structure for the SilverBallBluetoothService is as follows:
 
 ```sh
-.
 ├── apps
 │   ├── README.md
 │   ├── system
