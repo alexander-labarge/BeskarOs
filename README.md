@@ -5,7 +5,7 @@
 ## Software Development Plan & Initial Documentation
 
 ### Project Start Date:
-- 29 Jul 24
+- 29 Jul 24 - Present
 
 ### Project Purpose and Motivation:
 
